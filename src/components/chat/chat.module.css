@@ -2,8 +2,9 @@
   width: 100%;
   max-width: 650px;
   background: #fafafa;
-  height: 60vh;
+  height: 78vh;
   padding: 10px;
+  align-items: center;
   overflow-y: scroll;
 }
 
@@ -24,4 +25,16 @@
   background: #40a9ff;
   color: #FFFFFF;
   align-self: end;
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sender {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
 }

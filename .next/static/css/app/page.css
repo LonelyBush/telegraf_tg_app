@@ -3,11 +3,12 @@
   \*******************************************************************************************************************************************************************************************************************************************************************/
 .page_homeContainer__ARORB {
   margin: 20px auto 20px;
-  background: #ffffff;
+  background: #f5f5f5;
   padding: 24px;
   border-radius: 10px;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
+  min-height: 80vh;
 }
 
 /*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
@@ -39,8 +40,9 @@
   width: 100%;
   max-width: 650px;
   background: #fafafa;
-  height: 60vh;
+  height: 78vh;
   padding: 10px;
+  align-items: center;
   overflow-y: scroll;
 }
 
@@ -61,5 +63,49 @@
   background: #40a9ff;
   color: #FFFFFF;
   align-self: end;
+}
+
+.chat_messageContent__Ld6ku {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chat_sender__sLnit {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/components/chat/chatList.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+.chatList_listWrapper__BESJN {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chatList_listBlock__rwCr8{
+ width: 100%;
+}
+
+.chatList_chatItem__sqgKQ {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.chatList_chatItem__sqgKQ:hover {
+  background: #f0f0f0;
+}
+
+.chatList_chatItem__sqgKQ.chatList_selected__8oBRs {
+  background: #e6f4ff;
 }
 

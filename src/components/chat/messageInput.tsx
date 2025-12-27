@@ -9,16 +9,24 @@ interface FieldType {
   message: string;
 }
 
-export const MessageInput = () => {
+interface MessageInputProps {
+  onSend: (text: string) => void;
+  disabled?: boolean;
+}
+
+export const MessageInput = ({ onSend, disabled }: MessageInputProps) => {
+  const [form] = Form.useForm();
+
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values);
+    onSend(values.message);
+    form.resetFields();
   };
 
   return (
     <Form
+      form={form}
       layout="vertical"
       name="Message"
-      initialValues={{ remember: true }}
       onFinish={onFinish}
       autoComplete="off"
       size="large"
@@ -27,13 +35,22 @@ export const MessageInput = () => {
       <Flex className={styles.inputWrapper}>
         <Form.Item<FieldType>
           name="message"
-          rules={[{ required: true, message: 'Please input your message!' }]}
+          rules={[{ required: true, message: 'Введите сообщение' }]}
           style={{ width: '100%' }}
         >
-          <Input size="large" placeholder="Write message text" />
+          <Input
+            size="large"
+            placeholder="Написать сообщение..."
+            disabled={disabled}
+          />
         </Form.Item>
         <Form.Item label={null} className={styles.btnWrapper}>
-          <ButtonIcon type="submit" color="primary" icon={<SendOutlined />} />
+          <ButtonIcon
+            type="submit"
+            color="primary"
+            icon={<SendOutlined />}
+            disabled={disabled}
+          />
         </Form.Item>
       </Flex>
     </Form>
