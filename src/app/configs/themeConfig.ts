@@ -8,5 +8,8 @@ export const theme: ThemeConfig = {
       itemHoverColor: '#0050b3',
       horizontalItemSelectedColor: '#0050b3',
     },
+    Input: {
+      controlHeightLG: 50,
+    },
   },
 };

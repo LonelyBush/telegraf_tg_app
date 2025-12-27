@@ -27,12 +27,6 @@
     overflow-y: scroll;
 }
 
-.footerSection {
-    padding: 10px;
-    background: #ffffff;
-    text-align: center;
-}
-
 @media (max-width: 568px){
     .headerContainer{
         padding: 0 25px;

@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 interface ButtonPrimaryProps {
   children: ReactNode;
@@ -8,6 +8,7 @@ interface ButtonPrimaryProps {
   loading?: boolean;
   disabled?: boolean;
   onClick?: () => void;
+  style?: CSSProperties;
 }
 
 export const ButtonPrimary = ({
@@ -17,6 +18,7 @@ export const ButtonPrimary = ({
   type,
   disabled,
   onClick,
+  style,
 }: ButtonPrimaryProps) => {
   return (
     <Button
@@ -26,6 +28,7 @@ export const ButtonPrimary = ({
       disabled={disabled}
       onClick={onClick}
       htmlType={type}
+      style={style}
     >
       {children}
     </Button>
