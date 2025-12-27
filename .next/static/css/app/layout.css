@@ -1,0 +1,61 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/app/globals.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************/
+:root {
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  height: 100vh;
+}
+
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/layouts/appLayout.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+.appLayout_title__B_Xnt{
+    display: block;
+  font-size: 1.5em;
+  font-weight: 400;
+  color: #fafafa;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.appLayout_headerContainer__8ngNY{
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #40a9ff;
+}
+.appLayout_layoutContainer__IEFrC {
+    display: flex;
+    flex-direction: column;
+}
+
+.appLayout_contentSection__vojAW {
+    display: flex;
+    flex-direction: column;
+    padding: 0 32px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+@media (max-width: 568px){
+    .appLayout_headerContainer__8ngNY{
+        padding: 0 25px;
+    }
+}

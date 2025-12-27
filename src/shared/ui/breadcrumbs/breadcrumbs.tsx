@@ -1,9 +1,11 @@
+'use client';
+
 import { Breadcrumb } from 'antd';
-import { useLocation } from 'react-router';
+import { usePathname } from 'next/navigation';
 import { generateBreadCrumbsItems } from './generateBreadCrumbsItems';
 
 export const BreadCrumbs = () => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   return (
     <Breadcrumb
@@ -11,7 +13,7 @@ export const BreadCrumbs = () => {
       separator=">"
       items={[
         { title: 'Home', href: '/' },
-        ...generateBreadCrumbsItems(location.pathname),
+        ...generateBreadCrumbsItems(pathname),
       ]}
     />
   );

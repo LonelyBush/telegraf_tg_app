@@ -1,0 +1,65 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/app/page.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+.page_homeContainer__ARORB {
+  margin: 20px auto 20px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 900px;
+}
+
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/components/chat/messageInput.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+.messageInput_formWrapper__r8dve {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.messageInput_inputWrapper__KnkmV {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+}
+
+.messageInput_btnWrapper__SN4dG {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/components/chat/chat.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+.chat_chatWrapper__bYfLh {
+  width: 100%;
+  max-width: 650px;
+  background: #fafafa;
+  height: 60vh;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.chat_messageWrapper__EglSp {
+  width: 100%;
+  max-width: 250px;
+  height: max-content;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.chat_messageWrapper__EglSp.chat_to__d0tRc {
+  background: #e6f4ff;
+  align-self: start;
+}
+
+.chat_messageWrapper__EglSp.chat_from__ZAExU {
+  background: #40a9ff;
+  color: #FFFFFF;
+  align-self: end;
+}
+

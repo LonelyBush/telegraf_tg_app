@@ -1,0 +1,27 @@
+.chatWrapper {
+  width: 100%;
+  max-width: 650px;
+  background: #fafafa;
+  height: 60vh;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.messageWrapper {
+  width: 100%;
+  max-width: 250px;
+  height: max-content;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.messageWrapper.to {
+  background: #e6f4ff;
+  align-self: start;
+}
+
+.messageWrapper.from {
+  background: #40a9ff;
+  color: #FFFFFF;
+  align-self: end;
+}
