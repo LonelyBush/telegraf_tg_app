@@ -1,72 +1,56 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Message, ChatInfo } from '@/lib/message-store';
 
-export function useMessages(chatId?: number) {
+export function useChats() {
+  const socketRef = useRef<WebSocket>(null);
+  const [selectedChatId, setSelectedChatId] = useState<number>();
+  const [chats, setChats] = useState<ChatInfo[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchMessages = useCallback(async () => {
-    try {
-      const url = chatId
-        ? `/api/messages?chatId=${chatId}`
-        : '/api/messages';
-      const res = await fetch(url);
-      const data = await res.json();
-      setMessages(data.messages);
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, [chatId]);
 
   useEffect(() => {
-    fetchMessages();
-    const interval = setInterval(fetchMessages, 2000);
-    return () => clearInterval(interval);
-  }, [fetchMessages]);
-
-  const sendMessage = async (text: string) => {
-    if (!chatId) return;
-
-    try {
-      await fetch('/api/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chatId, text }),
-      });
-      await fetchMessages();
-    } catch (error) {
-      console.error('Error sending message:', error);
-    }
-  };
-
-  return { messages, loading, sendMessage, refetch: fetchMessages };
-}
-
-export function useChats() {
-  const [chats, setChats] = useState<ChatInfo[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchChats = useCallback(async () => {
-    try {
-      const res = await fetch('/api/chats');
-      const data = await res.json();
-      setChats(data.chats);
-    } catch (error) {
-      console.error('Error fetching chats:', error);
-    } finally {
-      setLoading(false);
-    }
+    socketRef.current = new WebSocket('ws://localhost:8081');
+    socketRef.current.onopen = () => {
+      console.log('Connected to WebSocket');
+    };
+    socketRef.current.onmessage = (event) => {
+      const parsed = JSON.parse(event.data);
+      //console.log('Message received:', parsed);
+      if(parsed.type === 'new_chat'){
+        //console.log('new_chat', parsed.data);
+        setChats(parsed.data)
+      }
+      if(parsed.type === 'get_chats'){
+        console.log('get_chats', parsed.data);
+        setChats(parsed.data)
+      }
+      if(parsed.type === 'message_from_user' || parsed.type === 'message_from_bot'){
+        //console.log(event.data);
+        if(selectedChatId === parsed.data.chatId){
+          setMessages(parsed.data);
+        }
+      }
+    };
+    socketRef.current.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+    return () => {
+      if (socketRef.current){
+        socketRef.current.close();
+      }
+    };
   }, []);
 
-  useEffect(() => {
-    fetchChats();
-    const interval = setInterval(fetchChats, 3000);
-    return () => clearInterval(interval);
-  }, [fetchChats]);
+  const sendMessage = (message: string) => {
+    const createCall = {
+      chatId: selectedChatId,
+      text: message,
+    }
+    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+         socketRef.current.send(JSON.stringify(createCall));
+    }
+  }
 
-  return { chats, loading, refetch: fetchChats };
+  return { chats, setSelectedChatId, selectedChatId, sendMessage, messages };
 }

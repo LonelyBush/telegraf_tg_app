@@ -6,12 +6,10 @@ import style from './page.module.css';
 import { MessageInput } from '@/components/chat/messageInput';
 import { Chat } from '@/components/chat/chat';
 import { ChatList } from '@/components/chat/chatList';
-import { useMessages, useChats } from '@/hooks/useMessages';
+import { useChats } from '@/hooks/useMessages';
 
 export default function Home() {
-  const [selectedChatId, setSelectedChatId] = useState<number | undefined>();
-  const { chats, loading: chatsLoading } = useChats();
-  const { messages, loading: messagesLoading, sendMessage } = useMessages(selectedChatId);
+  const { chats, setSelectedChatId, selectedChatId, sendMessage, messages } = useChats();
 
   const handleSend = (text: string) => {
     if (selectedChatId) {
@@ -24,7 +22,6 @@ export default function Home() {
       <Flex vertical gap={10} style={{width: '40%'}}>
         <ChatList
           chats={chats}
-          loading={chatsLoading}
           selectedChatId={selectedChatId}
           onSelectChat={setSelectedChatId}
         />
@@ -34,7 +31,7 @@ export default function Home() {
         {selectedChatId ? (
           <>
           <Flex align='center' vertical>
-            <Chat messages={messages} loading={messagesLoading} />
+            <Chat messages={messages} />
             <MessageInput onSend={handleSend} />
           </Flex>
           </>

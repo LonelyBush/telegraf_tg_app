@@ -44,7 +44,8 @@ class MessageStore {
     return Array.from(this.chats.values());
   }
 
-  getChat(chatId: number): ChatInfo | undefined {
+  getChat(chatId: number
+  ): ChatInfo | undefined {
     return this.chats.get(chatId);
   }
 }
