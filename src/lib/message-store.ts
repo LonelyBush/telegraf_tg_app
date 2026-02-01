@@ -1,6 +1,6 @@
 export interface Message {
   id: string;
-  chatId: number;
+  chatId: string;
   text: string;
   from: 'user' | 'bot';
   username?: string;
@@ -9,29 +9,30 @@ export interface Message {
 }
 
 export interface ChatInfo {
-  chatId: number;
+  chatId: string;
   username?: string;
   firstName?: string;
   lastName?: string;
+  messengerType: 'whatsapp' |'telegram'
 }
 
 class MessageStore {
   private messages: Message[] = [];
-  private chats: Map<number, ChatInfo> = new Map();
+  private chats: Map<string, ChatInfo> = new Map();
 
   addMessage(message: Message) {
     this.messages.push(message);
     console.log('[Store] Messages count:', this.messages.length);
   }
 
-  getMessages(chatId?: number): Message[] {
+  getMessages(chatId?: string): Message[] {
     if (chatId) {
       return this.messages.filter((m) => m.chatId === chatId);
     }
     return this.messages;
   }
 
-  getMessagesSince(timestamp: number, chatId?: number): Message[] {
+  getMessagesSince(timestamp: number, chatId?: string): Message[] {
     return this.getMessages(chatId).filter((m) => m.timestamp > timestamp);
   }
 
@@ -44,7 +45,7 @@ class MessageStore {
     return Array.from(this.chats.values());
   }
 
-  getChat(chatId: number
+  getChat(chatId: string
   ): ChatInfo | undefined {
     return this.chats.get(chatId);
   }

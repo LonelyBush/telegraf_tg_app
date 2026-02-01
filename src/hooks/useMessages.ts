@@ -5,7 +5,7 @@ import type { Message, ChatInfo } from '@/lib/message-store';
 
 export function useChats() {
   const socketRef = useRef<WebSocket>(null);
-  const [selectedChatId, setSelectedChatId] = useState<number>();
+  const [selectedChatId, setSelectedChatId] = useState<string>();
   const [chats, setChats] = useState<ChatInfo[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
 

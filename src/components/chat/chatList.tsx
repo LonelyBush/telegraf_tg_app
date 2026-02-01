@@ -8,8 +8,8 @@ import styles from './chatList.module.css';
 interface ChatListProps {
   chats: ChatInfo[];
   loading?: boolean;
-  selectedChatId?: number;
-  onSelectChat: (chatId: number) => void;
+  selectedChatId?: string;
+  onSelectChat: (chatId: string) => void;
 }
 
 export const ChatList = ({
@@ -34,6 +34,17 @@ export const ChatList = ({
     );
   }
 
+  const switchContent = (type: string, chat: ChatInfo) => {
+    switch(type){
+      case 'telegram':
+        return `Telegram client: @${chat.username}`
+      case 'whatsapp':
+        return `Whatsapp client: ${chat.firstName}`
+      default:
+      return 'None'
+    }
+  }
+
   return (
     <div className={styles.listWrapper}>
       <Typography.Title level={5} style={{ margin: 0, color: '#333' }}>
@@ -55,8 +66,8 @@ export const ChatList = ({
               avatar={
                   <Avatar icon={<UserOutlined />} />
               }
-              title={chat.firstName || chat.username || `Chat ${chat.chatId}`}
-              description={chat.username ? `@${chat.username}` : undefined}
+              title={chat.firstName ?? chat.username}
+              description={switchContent(chat.messengerType, chat)}
             />
           </List.Item>
         )}

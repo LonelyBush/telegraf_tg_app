@@ -6,10 +6,11 @@ import { RawData, WebSocketServer } from 'ws';
 import { v4 as uuidv4 } from 'uuid';
 import { broadcastMessage, getChats } from '@/lib/ws';
 import { messageStore } from '@/lib/message-store';
+import { sendWhatsAppMessageToChat, startWhatsAppBot } from '@/lib/whats-app-bot';
 
 export interface WSCall {
   text: string;
-  chatId: number;
+  chatId: string;
 }
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -21,6 +22,7 @@ const app = next({ dev, hostname, port });
 
 app.prepare().then(() => {
   startBot();
+  startWhatsAppBot()
 
   createServer((req, res) => {
     const parsedUrl = parse(req.url!, true);
@@ -41,12 +43,32 @@ wss.on('connection', (ws) => {
   ws.on('message', (message: RawData) => {
   const messageString = message.toString();
   const { text, chatId }: WSCall = JSON.parse(messageString);
-
-  sendMessageToChat(chatId, text)
+  const chat = messageStore.getChat(chatId);
+      if(chat && chat.messengerType === 'telegram'){
+      sendMessageToChat(chatId, text)
+      }else {
+      sendWhatsAppMessageToChat(chatId, text)
+      }
   });
 
   ws.on('close', () => {
     console.log(`Клиент отключился ID ${client_Id}`);
+  });
+});
+
+process.on('SIGINT', () => {
+  app.close();
+  wss.close(() => {
+    console.log('WebSocket server closed');
+    process.exit(0);
+  });
+});
+
+process.on('SIGTERM', () => {
+  app.close();
+  wss.close(() => {
+    console.log('WebSocket server closed');
+    process.exit(0);
   });
 });
 

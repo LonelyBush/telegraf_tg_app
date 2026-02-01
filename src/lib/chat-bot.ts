@@ -19,10 +19,11 @@ bot.command('start', async (ctx) => {
   const { chat, from } = ctx.message;
 
   const newChat: ChatInfo = {
-    chatId: chat.id,
+    chatId: chat.id.toString(),
     username: from?.username,
     firstName: from?.first_name,
     lastName: from?.last_name,
+    messengerType: 'telegram',
   }
 
   messageStore.addChat(newChat);
@@ -36,7 +37,7 @@ bot.on(message('text'), async (ctx) => {
 
   const newMessage: Message = {
     id: `${uuidv4()}`,
-    chatId: chat.id,
+    chatId: chat.id.toString(),
     text: text,
     from: 'user',
     username: from?.username,
@@ -45,20 +46,21 @@ bot.on(message('text'), async (ctx) => {
   }
 
   messageStore.addChat({
-    chatId: chat.id,
+    chatId: chat.id.toString(),
     username: from?.username,
     firstName: from?.first_name,
     lastName: from?.last_name,
+    messengerType: 'telegram',
   });
 
   messageStore.addMessage(newMessage);
   console.log(`[Bot] Message from ${from?.username || from?.first_name}: ${text}`);
 
-  broadcastMessage(wss, {type: 'message_from_user', data: messageStore.getMessages(chat.id)});
+  broadcastMessage(wss, {type: 'message_from_user', data: messageStore.getMessages(chat.id.toString())});
 });
 
 
-export async function sendMessageToChat(chatId: number, text: string) {
+export async function sendMessageToChat(chatId: string, text: string) {
   await bot.telegram.sendMessage(chatId, text);
 
   messageStore.addMessage({
